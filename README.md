@@ -7,11 +7,8 @@ de Datos, cursada en el Instituto Politécnico Nacional, unidad ESIME Culhuacán
 
 ```
 catering           
-    │              
     ├─┬─ src       
-    │ │            
-    │ └─── db-scripts
-    │              
+    │ └── db-scripts
     └─── doc       
 ```
 
