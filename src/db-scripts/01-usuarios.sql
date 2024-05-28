@@ -41,13 +41,15 @@ select role from dba_roles where role = 'DESARROLLADOR';
 select privilege from dba_sys_privs where grantee = 'DESARROLLADOR';
 grant create session,
     create table,
+    create view,
+    create procedure,
+    create sequence, -- Para crear ids automáticamente
     alter any table,
     drop any table,
     insert any table,
     update any table,
     delete any table,
     select any table,
-    create sequence, -- Para crear ids automáticamente
     to desarrollador;
 select privilege from dba_sys_privs where grantee = 'DESARROLLADOR';
 
