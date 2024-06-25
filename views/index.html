@@ -4,29 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catering Manager</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
-<body>
-    <h1>Catering Manager</h1>
-    <div class="container">
-        <div class="box">
-            <a href="dashboard.html">Dashboard</a>
-        </div>
-        <div class="box">
-            <a href="inventory.html">Inventory</a>
-        </div>
-        <div class="box">
-            <a href="staff.html">Staff</a>
-        </div>
-        <div class="box">
-            <a href="branches.html">Branches</a>
-        </div>
-        <div class="box">
-            <a href="orders.html">Orders</a>
-        </div>
-        <div class="box">
-            <a href="administration.html">Administration</a>
-        </div>
+
+<header>
+    <div class="sidebar">
+        <h1>Catering Management</h1>
+        <nav>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#inventory">Inventory</a></li>
+                <li><a href="#staff">Staff</a></li>
+                <li><a href="#branches">Branches</a></li>
+                <li><a href="#administration">Administration</a></li>
+            </ul>
+        </nav>
     </div>
+</header>
+
+<body>
+    <div class="main-content">
+        <header>
+            <input type="text" placeholder="Search branches, staff, or inventory...">
+        </header>
+        <section class="overview">
+            <div class="overview-box">
+                <h2>Inventory Overview</h2>
+                <p>View the current inventory levels across all branches.</p>
+                <ul>
+                    <li>Total Items: 1,250</li>
+                    <li>In Stock: 950</li>
+                    <li>Out of Stock: 300</li>
+                </ul>
+            </div>
+            <div class="overview-box">
+                <h2>Staff Overview</h2>
+                <p>View the current staff members across all branches.</p>
+                <ul>
+                    <li>Total Staff: 85</li>
+                    <li>Chefs: 45</li>
+                    <li>Servers: 25</li>
+                    <li>Managers: 15</li>
+                </ul>
+            </div>
+            <div class="overview-box">
+                <h2>Branch Overview</h2>
+                <p>View the current branches and their details.</p>
+                <ul>
+                    <li>Total Branches: 8</li>
+                    <li>Open Branches: 6</li>
+                    <li>Closed Branches: 2</li>
+                </ul>
+            </div>
+        </section>
+        <section class="branches">
+            <h2>Branch Details</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Branch</th>
+                        <th>Address</th>
+                        <th>Manager</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Downtown</td>
+                        <td>123 Main St, Anytown USA</td>
+                        <td>John Doe</td>
+                        <td>Open</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Close</button>
+                        </td>
+                    </tr>
+                    <!-- Agrega más filas según sea necesario -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <!-- <script src="script.js"></script> -->
 </body>
 </html>
