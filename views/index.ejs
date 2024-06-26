@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catering Manager</title>
-    <link rel="stylesheet" href="styles/style.css">
-</head>
-
-<header>
-    <div class="sidebar">
-        <h1>Catering Management</h1>
-        <nav>
-            <ul>
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="#inventory">Inventory</a></li>
-                <li><a href="#staff">Staff</a></li>
-                <li><a href="#branches">Branches</a></li>
-                <li><a href="#administration">Administration</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
-
-<body>
+<%- include ('partials/header.ejs') %>
     <div class="main-content">
         <header>
             <input type="text" placeholder="Search branches, staff, or inventory...">
@@ -32,9 +8,9 @@
                 <h2>Inventory Overview</h2>
                 <p>View the current inventory levels across all branches.</p>
                 <ul>
-                    <li>Total Items: 1,250</li>
-                    <li>In Stock: 950</li>
-                    <li>Out of Stock: 300</li>
+                    <li>Total Items: <%= data.inventory %></li>
+                    <li>In Stock: <%= data.in_stock %></li>
+                    <li>Out of Stock: <%= data.out_of_stock %></li>
                 </ul>
             </div>
             <div class="overview-box">
@@ -85,6 +61,4 @@
             </table>
         </section>
     </div>
-    <!-- <script src="script.js"></script> -->
-</body>
-</html>
+<%- include ('partials/footer.ejs') %>

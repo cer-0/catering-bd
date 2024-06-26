@@ -1,11 +1,13 @@
 const path = require('path');
 const express = require('express');
-const routes = require('./routes/index');
+const mainRoutes = require('./routes/main-router');
+const apiRoutes = require('./routes/api');
 const app = express();
 
 //Settings
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 //Middlewares
 app.use(express.urlencoded({extended: false}));
@@ -17,7 +19,8 @@ app.use((req, res, next) => {
 });
 
 //Routes
-app.use('/', routes);
+app.use('/', mainRoutes);
+app.use('/api', apiRoutes);
 
 //Static files
 app.use(express.static(path.join(__dirname, 'public')));
