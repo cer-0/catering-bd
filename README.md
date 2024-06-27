@@ -6,14 +6,26 @@ de Datos, cursada en el Instituto Politécnico Nacional, unidad ESIME Culhuacán
 # Estructura del proyecto
 
 ```
-catering           
-    ├─┬─ src       
-    │ └── db-scripts
-    └─── doc       
+catering-bd
+    ├── controllers
+    ├── doc
+    │   └── diagramas
+    ├── public
+    │   └── scripts
+    ├── src
+    │   └── db-scripts
+    │       ├── 01-usuarios.sql
+    │       ├── 02-tablas.sql
+    │       └── 03-datos.sql
+    ├── .gitignore
+    ├── LICENSE
+    └── README.md
 ```
 
-- `src`: Contiene código, scripts y otros archivos necesarios para el sistema.
-- `doc`: Contiene archivos de arquitectura del sistema.
+- [`controllers`](command:_github.copilot.openRelativePath?%5B%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2FC%3A%2FUsers%2Farguelles%2FDocuments%2FDataBases%2FGithubRepository%2Fcatering-bd%2Fcontrollers%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%5D "c:\Users\arguelles\Documents\DataBases\GithubRepository\catering-bd\controllers"): Contiene los controladores para la lógica de negocio del sistema.
+- [`doc/diagramas`](command:_github.copilot.openRelativePath?%5B%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2FC%3A%2FUsers%2Farguelles%2FDocuments%2FDataBases%2FGithubRepository%2Fcatering-bd%2Fdoc%2Fdiagramas%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%5D "c:\Users\arguelles\Documents\DataBases\GithubRepository\catering-bd\doc\diagramas"): Contiene los diagramas de arquitectura y diseño del sistema.
+- [`public/scripts`](command:_github.copilot.openRelativePath?%5B%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2FC%3A%2FUsers%2Farguelles%2FDocuments%2FDataBases%2FGithubRepository%2Fcatering-bd%2Fpublic%2Fscripts%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%5D "c:\Users\arguelles\Documents\DataBases\GithubRepository\catering-bd\public\scripts"): Contiene scripts de lado cliente para la interacción en el navegador.
+- [`src/db-scripts`](command:_github.copilot.openRelativePath?%5B%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2FC%3A%2FUsers%2Farguelles%2FDocuments%2FDataBases%2FGithubRepository%2Fcatering-bd%2Fsrc%2Fdb-scripts%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%5D "c:\Users\arguelles\Documents\DataBases\GithubRepository\catering-bd\src\db-scripts"): Contiene scripts SQL para la creación de la base de datos y la inserción inicial de datos.
 
 # Instalación
 
