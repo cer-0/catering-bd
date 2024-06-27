@@ -8,28 +8,30 @@
                 <h2>Inventory Overview</h2>
                 <p>View the current inventory levels across all branches.</p>
                 <ul>
-                    <li>Total Items: <%= data.inventory %></li>
-                    <li>In Stock: <%= data.in_stock %></li>
-                    <li>Out of Stock: <%= data.out_of_stock %></li>
+                    <li>Total Items: <%= total_items %></li>
+                    <li>In Stock: <%= in_stock%></li>
+                    <li>Out of Stock: <%=out_of_stock%></li>
                 </ul>
             </div>
             <div class="overview-box">
                 <h2>Staff Overview</h2>
                 <p>View the current staff members across all branches.</p>
                 <ul>
-                    <li>Total Staff: 85</li>
-                    <li>Chefs: 45</li>
-                    <li>Servers: 25</li>
-                    <li>Managers: 15</li>
+                    <li>Total Staff: <%=total_staff%></li>
+                    <li>Supervisors: <%=supervisors%></li>
+                    <li>Line Staff: <%=line_staff%></li>
+                    <li>Drivers: <%=drivers%></li>
+                    <li>Coffee Makers: <%=coffeemakers%></li>
                 </ul>
             </div>
             <div class="overview-box">
                 <h2>Branch Overview</h2>
                 <p>View the current branches and their details.</p>
                 <ul>
-                    <li>Total Branches: 8</li>
-                    <li>Open Branches: 6</li>
-                    <li>Closed Branches: 2</li>
+                    <li>Total Branches: <%=total_branches%></li>
+                    <li>CDMX Branches: <%=CDMX_branches%> </li>
+                    <li>Veracruz Branches: <%=veracruz_branches%></li>
+                    <li>Quintana Roo Branches: <%=quintana_roo_branches%></li>
                 </ul>
             </div>
         </section>
