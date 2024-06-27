@@ -21,6 +21,20 @@ router.get('/', async (req, res) => {
         const cdmx_branches = await connection.execute("select count(estado_id) from sucursal join direccion on (sucursal.direccion_id = direccion.id) where estado_id = 1");
         const veracruz_branches = await connection.execute("select count(estado_id) from sucursal join direccion on (sucursal.direccion_id = direccion.id) where estado_id = 2");
         const quintana_roo_branches = await connection.execute("select count(estado_id) from sucursal join direccion on (sucursal.direccion_id = direccion.id) where estado_id = 5");
+        const branches_basic_info = await connection.execute(`
+            SELECT 
+                ESTADO.ESTADO AS STATE,
+                DIRECCION.MUNICIPIO AS BRANCH, 
+                (DIRECCION.CALLE || ' ' || DIRECCION.NO_EXT || ' ' || DIRECCION.COLONIA || ' ' || DIRECCION.CP) AS ADDRESS, 
+                (EMPLEADO.NOMBRE || ' ' || EMPLEADO.APELLIDO_PATERNO) AS MANAGER,
+                (SUCURSAL.LADA || '' || SUCURSAL.TELEFONO) AS TELEPHONE 
+                FROM EMPLEADO
+                JOIN SUCURSAL ON (EMPLEADO.SUCURSAL_ID = SUCURSAL.ID)
+                JOIN DIRECCION ON (SUCURSAL.DIRECCION_ID =DIRECCION.ID)
+                JOIN ESTADO ON (DIRECCION.ESTADO_ID = ESTADO.ID)
+                WHERE ROL_EMPLEADO_ID= 1
+                ORDER BY SUCURSAL_ID
+        	`);
 
         res.render('index', {
             title: 'Dashboard',
@@ -35,8 +49,14 @@ router.get('/', async (req, res) => {
             total_branches: total_branches.rows[0][0],
             CDMX_branches: cdmx_branches.rows[0][0],
             veracruz_branches: veracruz_branches.rows[0][0],
-            quintana_roo_branches: quintana_roo_branches.rows[0][0]
-        });
+            quintana_roo_branches: quintana_roo_branches.rows[0][0],
+            branches_basic_info: branches_basic_info.rows.map(row => ({
+                state: row[0],
+                branch: row[1],
+                address: row[2],
+                manager: row[3],
+                telephone: row[4]
+        }))});
     } catch (err) {
         console.error(err);
         res.sendStatus(500);

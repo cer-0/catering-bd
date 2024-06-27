@@ -40,25 +40,23 @@
             <table>
                 <thead>
                     <tr>
+                        <th>State</th>
                         <th>Branch</th>
                         <th>Address</th>
                         <th>Manager</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th>Telephone</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Downtown</td>
-                        <td>123 Main St, Anytown USA</td>
-                        <td>John Doe</td>
-                        <td>Open</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Close</button>
-                        </td>
-                    </tr>
-                    <!-- Agrega más filas según sea necesario -->
+                    <%branches_basic_info.forEach(function(branch){%>
+                        <tr>
+                            <td><%=branch.state%></td>
+                            <td><%=branch.branch%></td>
+                            <td><%=branch.address%></td>
+                            <td><%=branch.manager%></td>
+                            <td><%=branch.telephone%></td>
+                        </tr>
+                    <%})%>
                 </tbody>
             </table>
         </section>
