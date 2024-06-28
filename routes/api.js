@@ -37,9 +37,8 @@ router.post('/insert-product', async (req, res) => {
         );
 
         // Commit de la transacción
-        await connection.commit();
-
-        res.status(201).send('Producto insertado correctamente');
+         await connection.commit();
+        res.status(201).redirect('/administration');
     } catch (err) {
         // Rollback de la transacción en caso de error
         if (connection) {
