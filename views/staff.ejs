@@ -1,3 +1,46 @@
 <%- include('partials/header.ejs') %>
-    Bienvenido a la página de personal.
+<header>
+    <form action="/staff" method="GET">
+        <input type="search" name="search" placeholder="Search staff..." required>
+        <button type="submit">Search</button>
+    </form>
+</header>
+<section class="branches">
+    <h2>Staff Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Telephone</th>
+                <th>Position</th>
+                <th>Branch</th>
+                <th>Binlingual</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%staff.forEach(function(personal){%>
+                <tr>
+                    <td><%=personal.id%></td>
+                    <td><%=personal.name%></td>
+                    <td><%=personal.telephone%></td>
+                    <td><%=personal.position%></td>
+                    <td><%=personal.branch%></td>
+                    <%if(personal.bilingual>0){%>
+                    <td><%='Si'%></td>
+                    <%}else{%>
+                    <td><%='No'%></td>
+                    <%}%>
+                    <form action="/api/delete-employee" method="POST">
+                        <td>
+                            <input type="hidden" name="id" value="<%=personal.id%>" >
+                            <button type="submit">Delete</button>
+                        </td>
+                    </form>
+                </tr>
+            <%})%>
+        </tbody>
+    </table>
+</section>
 <%- include('partials/footer.ejs') %>

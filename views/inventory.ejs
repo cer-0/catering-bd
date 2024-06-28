@@ -1,3 +1,38 @@
 <%- include('partials/header.ejs') %>
-    Bienvenido a la página de inventario.
+<header>
+    <form action="/inventory" method="GET">
+        <input type="search" name="search" placeholder="Search inventory..." required>
+        <button type="submit">Search</button>
+    </form>
+</header>
+<section class="branches">
+    <h2>Inventory Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Product</th>
+                <th>Expiration date</th>
+                <th>Quantity</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%inventory.forEach(function(product){%>
+                <tr>
+                    <td><%=product.code%></td>
+                    <td><%=product.product%></td>
+                    <td><%=product.expiration_date%></td>
+                    <td><%=product.quantity%></td>
+                    <form action="/api/delete-product" method="POST">
+                        <td>
+                            <input type="hidden" name="codigo" value="<%=product.code%>" >
+                            <button type="submit">Delete</button>
+                        </td>
+                    </form>
+                </tr>
+            <%})%>
+        </tbody>
+    </table>
+</section>
 <%- include('partials/footer.ejs') %>
