@@ -1,0 +1,64 @@
+<%- include ('partials/header.ejs') %>
+    <div class="main-content">
+        <header>
+            <input type="text" placeholder="Search branches, staff, or inventory...">
+        </header>
+        <section class="overview">
+            <div class="overview-box">
+                <h2>Inventory Overview</h2>
+                <p>View the current inventory levels across all branches.</p>
+                <ul>
+                    <li>Total Items: <%= data.inventory %></li>
+                    <li>In Stock: <%= data.in_stock %></li>
+                    <li>Out of Stock: <%= data.out_of_stock %></li>
+                </ul>
+            </div>
+            <div class="overview-box">
+                <h2>Staff Overview</h2>
+                <p>View the current staff members across all branches.</p>
+                <ul>
+                    <li>Total Staff: 85</li>
+                    <li>Chefs: 45</li>
+                    <li>Servers: 25</li>
+                    <li>Managers: 15</li>
+                </ul>
+            </div>
+            <div class="overview-box">
+                <h2>Branch Overview</h2>
+                <p>View the current branches and their details.</p>
+                <ul>
+                    <li>Total Branches: 8</li>
+                    <li>Open Branches: 6</li>
+                    <li>Closed Branches: 2</li>
+                </ul>
+            </div>
+        </section>
+        <section class="branches">
+            <h2>Branch Details</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Branch</th>
+                        <th>Address</th>
+                        <th>Manager</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Downtown</td>
+                        <td>123 Main St, Anytown USA</td>
+                        <td>John Doe</td>
+                        <td>Open</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Close</button>
+                        </td>
+                    </tr>
+                    <!-- Agrega más filas según sea necesario -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+<%- include ('partials/footer.ejs') %>
