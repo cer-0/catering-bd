@@ -129,7 +129,7 @@ router.get('/staff', async (req, res) => {
         connection = await db.initialize();
         
         const staff = await connection.execute(
-            `select 
+            `select empleado.id as id,
             (empleado.nombre || ' ' || empleado.apellido_paterno || ' ' || empleado.apellido_materno) as name,
             (empleado.lada || ' ' || empleado.telefono) as telephone,
             rol as position,
@@ -139,18 +139,20 @@ router.get('/staff', async (req, res) => {
             join rol_empleado on (empleado.rol_empleado_id = rol_empleado.id)
             join sucursal on (empleado.sucursal_id = sucursal.id)
             join direccion on (sucursal.direccion_id = direccion.id)
-            where lower(empleado.nombre || ' ' || empleado.apellido_paterno || ' ' || empleado.apellido_materno) like lower(:search)`,
+            where lower(empleado.nombre || ' ' || empleado.apellido_paterno || ' ' || empleado.apellido_materno) like lower(:search)
+            order by empleado.id`,
             {search}
         );
 
         res.render('staff', {
             title: 'Staff',
             staff: staff.rows.map(row => ({
-                name: row[0],
-                telephone: row[1],
-                position: row[2],
-                branch: row[3],
-                bilingual: row[4]
+                id: row[0],
+                name: row[1],
+                telephone: row[2],
+                position: row[3],
+                branch: row[4],
+                bilingual: row[5]
             }))
         });
     } catch (err) {
@@ -185,6 +187,10 @@ router.get('/administration', async (req, res) => {
             `select rol from rol_empleado`
         );
 
+        const employees_id = await connection.execute(
+            `select id from empleado`
+        );
+
         res.render('administration', {
             title: 'Administration',
             product_types: product_types.rows.map(row => ({
@@ -195,6 +201,9 @@ router.get('/administration', async (req, res) => {
             })),
             employees_rol: employees_rol.rows.map(row => ({
                 employee_rol: row[0]
+            })),
+            employees_id: employees_id.rows.map(row => ({
+                employee_id: row[0]
             }))
         });
     } catch (err) {

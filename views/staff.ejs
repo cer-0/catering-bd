@@ -10,6 +10,7 @@
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Telephone</th>
                 <th>Position</th>
@@ -21,6 +22,7 @@
         <tbody>
             <%staff.forEach(function(personal){%>
                 <tr>
+                    <td><%=personal.id%></td>
                     <td><%=personal.name%></td>
                     <td><%=personal.telephone%></td>
                     <td><%=personal.position%></td>

@@ -185,4 +185,55 @@ router.post('/delete-employee', async (req, res) => {
     }
 });
 
+//Endopoint para actualizar empleados en la base de datos
+router.post('/update-employee', async (req, res) => {
+    let connection;
+    try {
+        connection = await db.initialize();
+        const { id, nombre, apellido_paterno, apellido_materno, correo, lada, telefono} = req.body;
+        const rol_de_empleado  = parseInt(req.body.rol_de_empleado, 10);
+        const bilingue = parseInt(req.body.bilingue === 'on' ? '1' : '0', 10);
+        const sucursal = parseInt(req.body.sucursal, 10);
+        
+        // Insertar en la tabla producto
+        await connection.execute(
+            `update empleado set nombre = :nombre, apellido_paterno = :apellido_paterno, apellido_materno = :apellido_materno, 
+            correo_empleado = :correo, lada = :lada, telefono = :telefono, rol_empleado_id = :rol_de_empleado, 
+            bilingue_id = :bilingue, sucursal_id = :sucursal where id = :id`,
+            {
+                id,
+                nombre,
+                apellido_paterno,
+                apellido_materno,
+                correo,
+                lada,
+                telefono,
+                rol_de_empleado,
+                bilingue,
+                sucursal
+            }
+        );
+
+        // Commit de la transacción
+            await connection.commit();
+        res.status(201).redirect('/administration');
+    } catch (err) {
+        // Rollback de la transacción en caso de error
+        if (connection) {
+            await connection.rollback();
+        }
+        res.status(500).send('Error al actualizar el empleado');
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+);
+
+
 module.exports = router;
