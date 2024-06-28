@@ -1,3 +1,31 @@
 <%- include('partials/header.ejs') %>
-    Bienvenido a la página de personal.
+<section class="branches">
+    <h2>Staff Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Telephone</th>
+                <th>Position</th>
+                <th>Branch</th>
+                <th>Binlingual</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%staff.forEach(function(personal){%>
+                <tr>
+                    <td><%=personal.name%></td>
+                    <td><%=personal.telephone%></td>
+                    <td><%=personal.position%></td>
+                    <td><%=personal.branch%></td>
+                    <%if(personal.bilingual>0){%>
+                    <td><%='Si'%></td>
+                    <%}else{%>
+                    <td><%='No'%></td>
+                    <%}%>
+                </tr>
+            <%})%>
+        </tbody>
+    </table>
+</section>
 <%- include('partials/footer.ejs') %>

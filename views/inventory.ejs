@@ -1,3 +1,27 @@
 <%- include('partials/header.ejs') %>
-    Bienvenido a la página de inventario.
+<section class="branches">
+    <h2>Inventory Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Product</th>
+                <th>Expiration date</th>
+                <th>Quantity</th>
+                <th>Branch ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%inventory.forEach(function(product){%>
+                <tr>
+                    <td><%=product.code%></td>
+                    <td><%=product.product%></td>
+                    <td><%=product.expiration_date%></td>
+                    <td><%=product.quantity%></td>
+                    <td><%=product.branch_id%></td>
+                </tr>
+            <%})%>
+        </tbody>
+    </table>
+</section>
 <%- include('partials/footer.ejs') %>

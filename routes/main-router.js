@@ -77,10 +77,72 @@ router.get('/inventory', async (req, res) => {
     let connection;
     try {
         connection = await db.initialize();
-        const result = await connection.execute("select nombre from producto");
+        
+        const inventory = await connection.execute(
+            `SELECT 
+                producto.codigo, 
+                producto.descripcion AS producto, 
+                TO_CHAR(producto.caducidad, 'DD/Month/YYYY', 'NLS_DATE_LANGUAGE=SPANISH') AS caducidad, 
+                cantidad, 
+                sucursal_id 
+                FROM producto_sucursal
+                JOIN producto ON (producto_sucursal.producto_codigo = producto.codigo) 
+                ORDER BY sucursal_id`
+        );
+
         res.render('inventory', {
             title: 'Inventory',
-            data: result.rows.map(row => ({nombre: row[0]}))
+            inventory: inventory.rows.map(row => ({
+                code: row[0],
+                product: row[1],
+                expiration_date: row[2],
+                quantity: row[3],
+                branch_id: row[4],
+            }))
+        });
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+});
+
+//Pagina de empleados
+
+router.get('/staff', async (req, res) => {
+    let connection;
+    try {
+        connection = await db.initialize();
+        
+        const staff = await connection.execute(
+            `select 
+            (empleado.nombre || ' ' || empleado.apellido_paterno || ' ' || empleado.apellido_materno) as name,
+            (empleado.lada || ' ' || empleado.telefono) as telephone,
+            rol as position,
+            direccion.municipio as branch,
+            bilingue_id as bilingual
+            from empleado
+            join rol_empleado on (empleado.rol_empleado_id = rol_empleado.id)
+            join sucursal on (empleado.sucursal_id = sucursal.id)
+            join direccion on (sucursal.direccion_id = direccion.id)`
+        );
+
+        res.render('staff', {
+            title: 'Staff',
+            staff: staff.rows.map(row => ({
+                name: row[0],
+                telephone: row[1],
+                position: row[2],
+                branch: row[3],
+                bilingual: row[4]
+            }))
         });
     } catch (err) {
         console.error(err);
