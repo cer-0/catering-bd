@@ -110,23 +110,32 @@ router.post('/delete-product', async (req, res) => {
     try {
         connection = await db.initialize();
         const codigo = req.body.codigo;
-        
+
         // Eliminar en la tabla producto
+
+        // await connection.execute(
+        //     `DELETE FROM producto_sucursal WHERE lower(producto_codigo) = lower(:codigo)`,
+        //     {
+        //         codigo
+        //     }
+        // );
+        
+
         await connection.execute(
-            `DELETE FROM producto WHERE codigo = :codigo`,
+            `DELETE FROM producto WHERE lower(codigo) = lower(:codigo)`,
             {
                 codigo
             }
         );
 
         // Commit de la transacción
-        //  await connection.commit();
-        res.status(201).redirect('/administration');
+         await connection.commit();
+        res.status(201).redirect('/inventory');
     } catch (err) {
         // Rollback de la transacción en caso de error
-        // if (connection) {
-        //     await connection.rollback();
-        // }
+        if (connection) {
+            await connection.rollback();
+        }
         res.status(500).send('Error al eliminar el producto');
     } finally {
         if (connection) {

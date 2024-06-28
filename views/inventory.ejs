@@ -14,7 +14,7 @@
                 <th>Product</th>
                 <th>Expiration date</th>
                 <th>Quantity</th>
-                <th>Branch ID</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +24,12 @@
                     <td><%=product.product%></td>
                     <td><%=product.expiration_date%></td>
                     <td><%=product.quantity%></td>
-                    <td><%=product.branch_id%></td>
+                    <form action="/api/delete-product" method="POST">
+                        <td>
+                            <input type="hidden" name="codigo" value="<%=product.code%>" >
+                            <button type="submit">Delete</button>
+                        </td>
+                    </form>
                 </tr>
             <%})%>
         </tbody>

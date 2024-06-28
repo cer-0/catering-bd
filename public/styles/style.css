@@ -54,7 +54,7 @@ header input[type="search"] {
 
 .overview {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-bottom: 20px;
 }
 
