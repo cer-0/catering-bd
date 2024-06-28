@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const mainRoutes = require('./routes/main-router');
+const apiRoutes = require('./routes/api');
 const app = express();
 
 //Settings
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
 
 //Routes
 app.use('/', mainRoutes);
+app.use('/api', apiRoutes);
 
 //Static files
 app.use(express.static(path.join(__dirname, 'public')));

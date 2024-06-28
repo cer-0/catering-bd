@@ -1,5 +1,36 @@
-<%- include('partials/header.ejs') %>
-
-    Bienvenido a la página de administración.
-
-<%- include('partials/footer.ejs') %>
+<%- include ('partials/header.ejs') %>
+        <section class="branches">
+            <h2>Inventory Administration</h2>
+            <form action="/api/insert-product" method="POST">
+                <div class="form-group">
+                    <label for="codigo">Código:</label>
+                    <input type="text" id="codigo" name="codigo" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="caducidad">Caducidad:</label>
+                    <input type="date" id="caducidad" name="caducidad" required>
+                </div>
+                <div class="form-group">
+                    <label for="tipo">Tipo:</label>
+                    <input type="text" id="tipo" name="tipo" required>
+                </div>
+                <div class="form-group">
+                    <label for="sucursal">Sucursal:</label>
+                    <input type="text" id="sucursal" name="sucursal" required>
+                </div>
+                <div class="form-group">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" name="cantidad" required>
+                </div>
+                <button type="submit">Insert product</button>
+            </form>
+        </section>
+<%- include ('partials/footer.ejs') %>

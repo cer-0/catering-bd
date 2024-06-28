@@ -158,4 +158,40 @@ router.get('/staff', async (req, res) => {
     }
 });
 
+//Pagina de administracion de inventario, sucurales y empleados
+
+router.get('/administration', async (req, res) => {
+    let connection;
+    try {
+        connection = await db.initialize();
+        
+        // const inventory = await connection.execute(
+        //     `SELECT 
+        //         producto.codigo, 
+        //         producto.descripcion AS producto, 
+        //         TO_CHAR(producto.caducidad, 'DD/Month/YYYY', 'NLS_DATE_LANGUAGE=SPANISH') AS caducidad, 
+        //         cantidad, 
+        //         sucursal_id 
+        //         FROM producto_sucursal
+        //         JOIN producto ON (producto_sucursal.producto_codigo = producto.codigo) 
+        //         ORDER BY sucursal_id`
+        // );
+
+        res.render('administration', {
+            title: 'Administration'
+        });
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+});
+
 module.exports = router;
