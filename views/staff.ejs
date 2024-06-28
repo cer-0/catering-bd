@@ -15,6 +15,7 @@
                 <th>Position</th>
                 <th>Branch</th>
                 <th>Binlingual</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,12 @@
                     <%}else{%>
                     <td><%='No'%></td>
                     <%}%>
+                    <form action="/api/delete-employee" method="POST">
+                        <td>
+                            <input type="hidden" name="id" value="<%=personal.id%>" >
+                            <button type="submit">Delete</button>
+                        </td>
+                    </form>
                 </tr>
             <%})%>
         </tbody>
