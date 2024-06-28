@@ -104,5 +104,40 @@ router.post('/insert-employee', async (req, res) => {
     }
 });
 
+//Endopoint para eliminar productos en la base de datos
+router.post('/delete-product', async (req, res) => {
+    let connection;
+    try {
+        connection = await db.initialize();
+        const codigo = req.body.codigo;
+        
+        // Eliminar en la tabla producto
+        await connection.execute(
+            `DELETE FROM producto WHERE codigo = :codigo`,
+            {
+                codigo
+            }
+        );
+
+        // Commit de la transacción
+        //  await connection.commit();
+        res.status(201).redirect('/administration');
+    } catch (err) {
+        // Rollback de la transacción en caso de error
+        // if (connection) {
+        //     await connection.rollback();
+        // }
+        res.status(500).send('Error al eliminar el producto');
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+});
+
 
 module.exports = router;

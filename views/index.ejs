@@ -1,59 +1,65 @@
 <%- include ('partials/header.ejs') %>
-        <section class="overview">
-            <div class="overview-box">
-                <h2>Inventory Overview</h2>
-                <p>View the current inventory levels across all branches.</p>
-                <ul>
-                    <li>Total Items: <%= total_items %></li>
-                    <li>In Stock: <%= in_stock%></li>
-                    <li>Out of Stock: <%=out_of_stock%></li>
-                </ul>
-            </div>
-            <div class="overview-box">
-                <h2>Staff Overview</h2>
-                <p>View the current staff members across all branches.</p>
-                <ul>
-                    <li>Total Staff: <%=total_staff%></li>
-                    <li>Supervisors: <%=supervisors%></li>
-                    <li>Line Staff: <%=line_staff%></li>
-                    <li>Drivers: <%=drivers%></li>
-                    <li>Coffee Makers: <%=coffeemakers%></li>
-                </ul>
-            </div>
-            <div class="overview-box">
-                <h2>Branch Overview</h2>
-                <p>View the current branches and their details.</p>
-                <ul>
-                    <li>Total Branches: <%=total_branches%></li>
-                    <li>CDMX Branches: <%=CDMX_branches%> </li>
-                    <li>Veracruz Branches: <%=veracruz_branches%></li>
-                    <li>Quintana Roo Branches: <%=quintana_roo_branches%></li>
-                </ul>
-            </div>
-        </section>
-        <section class="branches">
-            <h2>Branch Details</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>State</th>
-                        <th>Branch</th>
-                        <th>Address</th>
-                        <th>Manager</th>
-                        <th>Telephone</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%branches_basic_info.forEach(function(branch){%>
-                        <tr>
-                            <td><%=branch.state%></td>
-                            <td><%=branch.branch%></td>
-                            <td><%=branch.address%></td>
-                            <td><%=branch.manager%></td>
-                            <td><%=branch.telephone%></td>
-                        </tr>
-                    <%})%>
-                </tbody>
-            </table>
-        </section>
+<header>
+    <form action="/" method="GET">
+        <input type="search" name="search" placeholder="Search branch..." required>
+        <button type="submit">Search</button>
+    </form>
+</header>       
+<section class="overview">
+    <div class="overview-box">
+        <h2>Inventory Overview</h2>
+        <p>View the current inventory levels across all branches.</p>
+        <ul>
+            <li>Total Items: <%= total_items %></li>
+            <li>In Stock: <%= in_stock%></li>
+            <li>Out of Stock: <%=out_of_stock%></li>
+        </ul>
+    </div>
+    <div class="overview-box">
+        <h2>Staff Overview</h2>
+        <p>View the current staff members across all branches.</p>
+        <ul>
+            <li>Total Staff: <%=total_staff%></li>
+            <li>Supervisors: <%=supervisors%></li>
+            <li>Line Staff: <%=line_staff%></li>
+            <li>Drivers: <%=drivers%></li>
+            <li>Coffee Makers: <%=coffeemakers%></li>
+        </ul>
+    </div>
+    <div class="overview-box">
+        <h2>Branch Overview</h2>
+        <p>View the current branches and their details.</p>
+        <ul>
+            <li>Total Branches: <%=total_branches%></li>
+            <li>CDMX Branches: <%=CDMX_branches%> </li>
+            <li>Veracruz Branches: <%=veracruz_branches%></li>
+            <li>Quintana Roo Branches: <%=quintana_roo_branches%></li>
+        </ul>
+    </div>
+</section>
+<section class="branches">
+    <h2>Branch Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>State</th>
+                <th>Branch</th>
+                <th>Address</th>
+                <th>Manager</th>
+                <th>Telephone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%branches_basic_info.forEach(function(branch){%>
+                <tr>
+                    <td><%=branch.state%></td>
+                    <td><%=branch.branch%></td>
+                    <td><%=branch.address%></td>
+                    <td><%=branch.manager%></td>
+                    <td><%=branch.telephone%></td>
+                </tr>
+            <%})%>
+        </tbody>
+    </table>
+</section>
 <%- include ('partials/footer.ejs') %>

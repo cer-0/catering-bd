@@ -1,4 +1,10 @@
 <%- include('partials/header.ejs') %>
+<header>
+    <form action="/staff" method="GET">
+        <input type="search" name="search" placeholder="Search staff..." required>
+        <button type="submit">Search</button>
+    </form>
+</header>
 <section class="branches">
     <h2>Staff Details</h2>
     <table>

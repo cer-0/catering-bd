@@ -45,7 +45,7 @@ header {
     margin-bottom: 20px;
 }
 
-header input[type="text"] {
+header input[type="search"] {
     width: 300px;
     padding: 10px;
     border: 1px solid #ccc;

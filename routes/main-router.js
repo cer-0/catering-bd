@@ -8,6 +8,7 @@ const db = require('./db_cofiguration');
 router.get('/', async (req, res) => {
     let connection;
     try {
+        const search = req.query.search ? `%${req.query.search}%` : '%%';
         connection = await db.initialize();
         const total_items = await connection.execute("select count(*) from producto_sucursal");
         const in_stock = await connection.execute("select count(*) from producto_sucursal where cantidad > 0");
@@ -32,9 +33,9 @@ router.get('/', async (req, res) => {
                 JOIN SUCURSAL ON (EMPLEADO.SUCURSAL_ID = SUCURSAL.ID)
                 JOIN DIRECCION ON (SUCURSAL.DIRECCION_ID =DIRECCION.ID)
                 JOIN ESTADO ON (DIRECCION.ESTADO_ID = ESTADO.ID)
-                WHERE ROL_EMPLEADO_ID= 1
-                ORDER BY SUCURSAL_ID
-        	`);
+                WHERE ROL_EMPLEADO_ID= 1 and lower(direccion.municipio) like lower(:search)
+                ORDER BY SUCURSAL_ID`, {search}
+            );
 
         res.render('index', {
             title: 'Dashboard',
@@ -76,6 +77,7 @@ router.get('/', async (req, res) => {
 router.get('/inventory', async (req, res) => {
     let connection;
     try {
+        const search = req.query.search ? `%${req.query.search}%` : '%%';
         connection = await db.initialize();
         
         const inventory = await connection.execute(
@@ -87,7 +89,9 @@ router.get('/inventory', async (req, res) => {
                 sucursal_id 
                 FROM producto_sucursal
                 JOIN producto ON (producto_sucursal.producto_codigo = producto.codigo) 
-                ORDER BY sucursal_id`
+                where lower(producto.descripcion) like lower(:search)
+                ORDER BY sucursal_id `,
+                {search}
         );
 
         res.render('inventory', {
@@ -119,6 +123,9 @@ router.get('/inventory', async (req, res) => {
 router.get('/staff', async (req, res) => {
     let connection;
     try {
+        
+        const search = req.query.search ? `%${req.query.search}%` : '%%';
+
         connection = await db.initialize();
         
         const staff = await connection.execute(
@@ -131,7 +138,9 @@ router.get('/staff', async (req, res) => {
             from empleado
             join rol_empleado on (empleado.rol_empleado_id = rol_empleado.id)
             join sucursal on (empleado.sucursal_id = sucursal.id)
-            join direccion on (sucursal.direccion_id = direccion.id)`
+            join direccion on (sucursal.direccion_id = direccion.id)
+            where lower(empleado.nombre || ' ' || empleado.apellido_paterno || ' ' || empleado.apellido_materno) like lower(:search)`,
+            {search}
         );
 
         res.render('staff', {
