@@ -59,7 +59,7 @@
                     <label for="idEmpleado">ID:</label>
                     <select type="text" id="id" name="id" required>
                         <% for(let i=0; i<employees_id.length; i++) { %>
-                            <option value=<%=(i+1)%>><%= employees_id[i].employee_id%></option>
+                            <option value=<%=employees_id[i].employee_id%>><%= employees_id[i].employee_id%></option>
                         <% } %>
                     </select>
                 </div>
