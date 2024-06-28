@@ -164,21 +164,22 @@ router.get('/administration', async (req, res) => {
     let connection;
     try {
         connection = await db.initialize();
-        
-        // const inventory = await connection.execute(
-        //     `SELECT 
-        //         producto.codigo, 
-        //         producto.descripcion AS producto, 
-        //         TO_CHAR(producto.caducidad, 'DD/Month/YYYY', 'NLS_DATE_LANGUAGE=SPANISH') AS caducidad, 
-        //         cantidad, 
-        //         sucursal_id 
-        //         FROM producto_sucursal
-        //         JOIN producto ON (producto_sucursal.producto_codigo = producto.codigo) 
-        //         ORDER BY sucursal_id`
-        // );
+        const product_types = await connection.execute(
+            `select tipo from tipo_producto`
+        );
+
+        const branches = await connection.execute(
+            `SELECT nombre from sucursal`
+        );
 
         res.render('administration', {
-            title: 'Administration'
+            title: 'Administration',
+            product_types: product_types.rows.map(row => ({
+                product_type: row[0]
+            })),
+            branches: branches.rows.map(row => ({
+                branch: row[0]
+            }))
         });
     } catch (err) {
         console.error(err);
