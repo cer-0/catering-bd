@@ -56,5 +56,53 @@ router.post('/insert-product', async (req, res) => {
     }
 });
 
+router.post('/insert-employee', async (req, res) => {
+    let connection;
+    try {
+        connection = await db.initialize();
+        const { nombre, apellido_paterno, apellido_materno, correo, lada, telefono} = req.body;
+        const rol_de_empleado  = parseInt(req.body.rol_de_empleado, 10);
+        const bilingue = parseInt(req.body.bilingue === 'on' ? '1' : '0', 10);
+        const sucursal = parseInt(req.body.sucursal, 10);
+        
+        // Insertar en la tabla producto
+        await connection.execute(
+            `insert into empleado(nombre, apellido_paterno, apellido_materno, correo_empleado, lada, telefono, 
+            rol_empleado_id, bilingue_id, sucursal_id) 
+            values(:nombre, :apellido_paterno, :apellido_materno, :correo, 
+            :lada, :telefono, :rol_de_empleado, :bilingue, :sucursal)`,
+            {
+                nombre,
+                apellido_paterno,
+                apellido_materno,
+                correo,
+                lada,
+                telefono,
+                rol_de_empleado,
+                bilingue,
+                sucursal
+            }
+        );
+
+        // Commit de la transacción
+         await connection.commit();
+        res.status(201).redirect('/administration');
+    } catch (err) {
+        // Rollback de la transacción en caso de error
+        if (connection) {
+            await connection.rollback();
+        }
+        res.status(500).send('Error al insertar el empleado');
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+});
+
 
 module.exports = router;

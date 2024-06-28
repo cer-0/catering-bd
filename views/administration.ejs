@@ -1,6 +1,85 @@
 <%- include ('partials/header.ejs') %>
-        <section class="branches">
-            <h2>Inventory Administration</h2>
+<section class="branches">
+    <h2>Employee Administration</h2>
+    <section class="overview">
+        <div class="overview-box">
+            <h2>Insert employee</h2>
+            <form action="/api/insert-employee" method="POST">
+                <div class="form-group">
+                    <label for="nombreEmpleado">Nombre:</label>
+                    <input type="text" id="nombreEmpleado" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellidoPaterno">Apellido Paterno:</label>
+                    <input type="text" id="apellidoPaterno" name="apellido_paterno" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellidoMaterno">Apellido Materno:</label>
+                    <input type="text" id="apellidoMaterno" name="apellido_materno" required>
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo:</label>
+                    <input type="text" id="correo" name="correo" required>
+                </div>
+                <div class="form-group">
+                    <label for="lada">Lada:</label>
+                    <input type="text" id="lada" name="lada" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" id="telefono" name="telefono" required>
+                </div>
+                <div class="form-group">
+                    <label for="rol">Rol de Empleado:</label>
+                    <select type="text" id="rol_de_empleado" name="rol_de_empleado" required>
+                        <% for(let i=0; i<employees_rol.length; i++) { %>
+                            <option value=<%=(i+1)%>><%= employees_rol[i].employee_rol%></option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bilingue">Bilingüe:</label>
+                    <input type="checkbox" id="bilingue" name="bilingue">
+                </div>
+                <div class="form-group">
+                    <label for="sucursalEmpleado">Sucursal:</label>
+                    <select type="text" id="sucursal" name="sucursal" required>
+                        <% for(let i=0; i<branches.length; i++) { %>
+                            <option value=<%=(i+1)%>><%= branches[i].branch%></option>
+                        <% } %>
+                    </select>
+                </div>
+                <button type="submit">Insert employee</button>
+            </form>
+        </div>
+        <div class="overview-box">
+            <h2>Delete employee</h2>
+            <p>Here we are going to make a form to delete employees</p>
+            <ul>
+                <li>Total Staff: hola mundo</li>
+                <li>Supervisors: hola mundo</li>
+                <li>Line Staff: hola mundo</li>
+                <li>Drivers: hola mundo</li>
+                <li>Coffee Makers: hola mundo</li>
+            </ul>
+        </div>
+        <div class="overview-box">
+            <h2>Update employees</h2>
+            <p>View the current branches and their details.</p>
+            <ul>
+                <li>Total Branches: asa</li>
+                <li>CDMX Branches: asa </li>
+                <li>Veracruz Branches:assas</li>
+                <li>Quintana Roo Branches: asadda</li>
+            </ul>
+        </div>
+    </section>
+</section>
+<section class="branches">
+    <h2>Products Administration</h2>
+    <section class="overview">
+        <div class="overview-box">
+            <h2>Insert product</h2>
             <form action="/api/insert-product" method="POST">
                 <div class="form-group">
                     <label for="codigo">Código:</label>
@@ -40,5 +119,28 @@
                 </div>
                 <button type="submit">Insert product</button>
             </form>
-        </section>
+        </div>
+        <div class="overview-box">
+            <h2>Delete product</h2>
+            <p>View the current staff members across all branches.</p>
+            <ul>
+                <li>Total Staff: hola mundo</li>
+                <li>Supervisors: hola mundo</li>
+                <li>Line Staff: hola mundo</li>
+                <li>Drivers: hola mundo</li>
+                <li>Coffee Makers: hola mundo</li>
+            </ul>
+        </div>
+        <div class="overview-box">
+            <h2>Update product</h2>
+            <p>View the current branches and their details.</p>
+            <ul>
+                <li>Total Branches: asa</li>
+                <li>CDMX Branches: asa </li>
+                <li>Veracruz Branches:assas</li>
+                <li>Quintana Roo Branches: asadda</li>
+            </ul>
+        </div>
+    </section>
+</section>
 <%- include ('partials/footer.ejs') %>

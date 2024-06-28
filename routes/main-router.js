@@ -172,6 +172,10 @@ router.get('/administration', async (req, res) => {
             `SELECT nombre from sucursal`
         );
 
+        const employees_rol = await connection.execute(
+            `select rol from rol_empleado`
+        );
+
         res.render('administration', {
             title: 'Administration',
             product_types: product_types.rows.map(row => ({
@@ -179,6 +183,9 @@ router.get('/administration', async (req, res) => {
             })),
             branches: branches.rows.map(row => ({
                 branch: row[0]
+            })),
+            employees_rol: employees_rol.rows.map(row => ({
+                employee_rol: row[0]
             }))
         });
     } catch (err) {
